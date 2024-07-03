@@ -2,16 +2,16 @@ const List = require("./model");
 
 const create = async (req, res, next) => {
   try {
-    let payload = req.body;
-    let list = new List(payload);
+    const list = new List(req.body);
     await list.save();
-
-    return res.json(list);
+    res.status(201).json(list);
   } catch (err) {
-    if (err && err.name === "ValidationError") {
-      return res.json({
+    console.log(err);
+    if (err.name === "ValidationError") {
+      const firstError = Object.values(err.errors)[0].message;
+      return res.status(400).json({
         success: false,
-        message: err.message,
+        message: firstError,
       });
     }
     next(err);
@@ -19,20 +19,22 @@ const create = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
+  const { id } = req.params;
+  const payload = req.body;
+
   try {
-    let payload = req.body;
-    let list = await List.findById(req.params.id, payload);
+    let list = await List.findByIdAndUpdate(id, payload, { new: true });
     if (!list) {
       return res.status(404).json({
         success: false,
         message: "Item not found",
       });
     }
-    await list.save();
+
     return res.json(list);
   } catch (err) {
     if (err && err.name === "ValidationError") {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message: err.message,
       });
@@ -43,13 +45,10 @@ const update = async (req, res, next) => {
 
 const index = async (req, res, next) => {
   try {
-    let { skip = 0, limit = 10 } = req.query;
-    let list = await List.find().skip(parseInt(skip)).limit(parseInt(limit));
+    const { skip = 0, limit = 10 } = req.query;
+    const list = await List.find().skip(parseInt(skip)).limit(parseInt(limit));
 
-    return res.json({
-      success: true,
-      list,
-    });
+    return res.json({ success: true, list });
   } catch (error) {
     next(error);
   }
@@ -57,8 +56,7 @@ const index = async (req, res, next) => {
 
 const destroy = async (req, res, next) => {
   try {
-    let list = await List.findByIdAndDelete(req.params.id);
-    if (!list) {
+    if (!(await List.findByIdAndDelete(req.params.id))) {
       return res.status(404).json({
         success: false,
         message: "Item not found",

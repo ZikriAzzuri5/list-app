@@ -1,0 +1,12 @@
+.border-radius {
+  border-radius: 4px;
+  background-color: white;
+  padding: 10px;
+}
+
+.border-bottom-only {
+  border: none !important;
+  border-bottom: 1px solid grey !important; /* Sesuaikan warna dan ketebalan sesuai kebutuhan */
+  box-shadow: none !important;
+  border-radius: 0 !important; /* Menghapus border-radius */
+}
