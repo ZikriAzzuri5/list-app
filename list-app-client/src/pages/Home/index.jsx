@@ -43,7 +43,7 @@ export default function Home() {
       );
       setLists(
         lists.map((list) =>
-          list._id === id ? { ...list, status: !currentStatus } : list
+          list._id === id ? { ...list, status: response.data.status } : list
         )
       );
     } catch (error) {
@@ -61,6 +61,7 @@ export default function Home() {
       console.error(error);
     }
   };
+
   return (
     <Container>
       <Row className="pt-5">
