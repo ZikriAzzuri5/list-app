@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import "./index.css";
+import "../../index.css";
 
 const NotFound = () => {
   return (

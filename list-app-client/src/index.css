@@ -1,3 +1,44 @@
-body {
-  background-color: lightgrey;
+.wrapper {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+}
+
+.content {
+  border-radius: 4px;
+  background-color: white;
+  padding: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.border-bottom-only {
+  border: none !important;
+  border-bottom: 1px solid grey !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.not-found {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.not-found h1 {
+  font-size: 2em;
+  color: red;
+}
+
+.not-found a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.not-found a:hover {
+  background-color: #0056b3;
 }

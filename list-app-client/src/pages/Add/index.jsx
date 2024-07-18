@@ -1,7 +1,6 @@
 import axios from "axios";
-
 import { Row, Col, Form, Button } from "react-bootstrap";
-
+import "../../index.css";
 export default function Add({
   lists,
   name,
@@ -9,12 +8,14 @@ export default function Add({
   setName,
   setLists,
   setError,
+  isLoading,
 }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const addList = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/lists/",
+        `${API_URL}/lists/`,
         { name, status: false },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -29,7 +30,7 @@ export default function Add({
 
   return (
     <Row className="pt-5">
-      <Col sm={12} className="border-radius p-3">
+      <Col sm={12} className="content p-3">
         <Form onSubmit={addList}>
           <Form.Group className="mb-3">
             <Form.Label>New Task</Form.Label>
@@ -42,7 +43,9 @@ export default function Add({
             {error && <p style={{ color: "red" }}>{error}</p>}
           </Form.Group>
           <div className="d-flex justify-content-end">
-            <Button type="submit">Add</Button>
+            <Button type="submit" disabled={isLoading}>
+              Add
+            </Button>
           </div>
         </Form>
       </Col>

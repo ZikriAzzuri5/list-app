@@ -4,10 +4,11 @@ import NotFound from "./pages/Error";
 import Home from "./pages/Home";
 import Add from "./pages/Add";
 import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   return (
-    <div>
+    <div className="wrapper">
       <BrowserRouter>
         <Navbar />
         <Routes>
