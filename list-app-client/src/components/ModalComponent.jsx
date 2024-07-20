@@ -1,6 +1,11 @@
 import { Modal, Button } from "react-bootstrap";
 
-const ModalComponent = ({ show, handleClose, handleConfirm, modalAction }) => {
+export default function ModalComponent({
+  show,
+  handleClose,
+  handleConfirm,
+  modalAction,
+}) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -25,6 +30,4 @@ const ModalComponent = ({ show, handleClose, handleConfirm, modalAction }) => {
       </Modal.Footer>
     </Modal>
   );
-};
-
-export default ModalComponent;
+}

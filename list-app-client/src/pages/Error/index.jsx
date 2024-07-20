@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import "../../index.css";
 
-const NotFound = () => {
+export default function NotFound() {
   return (
     <Container>
       <Row className="pt-5">
@@ -15,6 +15,4 @@ const NotFound = () => {
       </Row>
     </Container>
   );
-};
-
-export default NotFound;
+}

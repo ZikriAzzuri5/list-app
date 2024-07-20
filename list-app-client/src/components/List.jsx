@@ -1,6 +1,11 @@
 import { CloseButton } from "react-bootstrap";
 
-const List = ({ lists, isLoading, handleUpdateStatus, handleDelete }) => {
+export default function List({
+  lists,
+  isLoading,
+  handleUpdateStatus,
+  handleDelete,
+}) {
   return (
     <>
       {lists.map((list) => (
@@ -26,6 +31,4 @@ const List = ({ lists, isLoading, handleUpdateStatus, handleDelete }) => {
       ))}
     </>
   );
-};
-
-export default List;
+}

@@ -22,8 +22,15 @@ export default function Home() {
   useEffect(() => {
     const fetchLists = async () => {
       try {
-        const response = await axios.get(`${API_URL}/lists`);
-        setLists(response.data.list);
+        const token = localStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await axios.get(`${API_URL}/lists`, config);
+        console.log(data);
+        setLists(data.list);
       } catch (error) {
         setError("Error fetching data");
         console.error(error);
@@ -36,13 +43,21 @@ export default function Home() {
   }, [API_URL]);
 
   const handleModalConfirm = async () => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     if (modalAction === "update") {
       try {
         const response = await axios.put(
           `${API_URL}/lists/${currentList._id}`,
           {
             status: !currentList.status,
-          }
+          },
+          config
         );
         setLists(
           lists.map((list) =>
@@ -57,7 +72,7 @@ export default function Home() {
       }
     } else if (modalAction === "delete") {
       try {
-        await axios.delete(`${API_URL}/lists/${currentList._id}`);
+        await axios.delete(`${API_URL}/lists/${currentList._id}`, config);
         setLists(lists.filter((list) => list._id !== currentList._id));
       } catch (error) {
         setError("Error deleting task");

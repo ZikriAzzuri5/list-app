@@ -12,6 +12,11 @@ const listSchema = Schema({
     type: Boolean,
     default: false,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: [true],
+  },
 });
 
 module.exports = model("List", listSchema);

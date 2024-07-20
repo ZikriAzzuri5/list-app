@@ -6,6 +6,7 @@ var logger = require("morgan");
 const cors = require("cors");
 var app = express();
 const listRoute = require("./app/list/router");
+const authRoute = require("./app/auth/router");
 const errorHandler = require("./middleware/errorHandler");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/auth", authRoute);
 app.use("/api", listRoute);
 app.use("/", function (req, res) {
   res.render("index", {

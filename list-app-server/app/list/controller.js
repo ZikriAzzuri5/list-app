@@ -3,7 +3,7 @@ const List = require("./model");
 
 const create = async (req, res, next) => {
   try {
-    const list = new List(req.body);
+    const list = new List({ ...req.body, user: req.user._id });
     await list.save();
     res.status(201).json(list);
   } catch (err) {
@@ -37,7 +37,9 @@ const update = async (req, res, next) => {
 const index = async (req, res, next) => {
   try {
     const { skip = 0, limit = 10 } = req.query;
-    const list = await List.find().skip(parseInt(skip)).limit(parseInt(limit));
+    const list = await List.find({ user: req.user._id })
+      .skip(parseInt(skip))
+      .limit(parseInt(limit));
 
     return res.json({ success: true, list });
   } catch (err) {
