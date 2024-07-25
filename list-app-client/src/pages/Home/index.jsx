@@ -29,7 +29,6 @@ export default function Home() {
           },
         };
         const { data } = await axios.get(`${API_URL}/lists`, config);
-        console.log(data);
         setLists(data.list);
       } catch (error) {
         setError("Error fetching data");

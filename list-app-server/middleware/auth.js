@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const config = require("../app/config");
 const CustomError = require("../utils/CustomError");
+
 const auth = (req, res, next) => {
   const token = req.header("Authorization").replace("Bearer ", "");
   if (!token)
